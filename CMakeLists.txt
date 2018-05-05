@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(rospy_message_converter)
 
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+
 find_package(catkin REQUIRED COMPONENTS message_generation roslib rospy rostest std_msgs)
 
 # Generate messages for testing (NOINSTALL)
@@ -22,5 +24,9 @@ generate_messages(
 
 catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 
+if(CATKIN_ENABLE_TESTING) 
 # Test launch files
 add_rostest(test/test_all.test)
+endif()
+
+endif()
